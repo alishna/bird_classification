@@ -5,6 +5,10 @@ __pycache__/
 *.pyo
 *.pyd
 
+# Dataset folders
+VALID/
+static/
+
 # Jupyter notebooks checkpoints
 .ipynb_checkpoints/
 
