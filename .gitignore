@@ -1,0 +1,24 @@
+# Python environment
+venv/
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Jupyter notebooks checkpoints
+.ipynb_checkpoints/
+
+# TensorFlow / Keras model files
+*.h5
+*.hdf5
+
+# Logs and runtime files
+*.log
+*.pot
+*.pydevproject
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db

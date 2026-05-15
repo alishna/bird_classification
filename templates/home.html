@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feather Finder | Bird Image Classifier</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #eef2fb 0%, #f8fafc 100%);
+            color: #2d3a4b;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 520px;
+            margin: 70px auto;
+            background-color: #ffffff;
+            padding: 32px 36px;
+            border-radius: 24px;
+            box-shadow: 0 18px 50px rgba(45, 58, 75, 0.12);
+        }
+        h1 {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 14px;
+            letter-spacing: 0.03em;
+        }
+        p.subtitle {
+            text-align: center;
+            color: #61708a;
+            margin-top: 0;
+            margin-bottom: 28px;
+            line-height: 1.6;
+        }
+        label {
+            font-weight: 700;
+            color: #32435f;
+            display: block;
+            margin-bottom: 10px;
+        }
+        input[type="file"] {
+            width: 100%;
+            padding: 12px 14px;
+            border-radius: 14px;
+            border: 1px solid #dfe3ed;
+            cursor: pointer;
+            transition: border-color 0.2s ease;
+        }
+        input[type="file"]:hover {
+            border-color: #9ab2d3;
+        }
+        .preview {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .preview img {
+            max-width: 100%;
+            border-radius: 18px;
+            border: 1px solid #dfe3ed;
+            box-shadow: 0 8px 24px rgba(34, 60, 80, 0.08);
+        }
+        input[type="submit"] {
+            width: 100%;
+            padding: 14px;
+            background-color: #3272d9;
+            color: #ffffff;
+            border: none;
+            border-radius: 16px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 700;
+            margin-top: 28px;
+            transition: background-color 0.2s ease;
+        }
+        input[type="submit"]:hover {
+            background-color: #2d65c8;
+        }
+        .model-info {
+            margin-top: 18px;
+            font-size: 14px;
+            color: #6b7a95;
+            text-align: center;
+        }
+        @media (max-width: 560px) {
+            .container {
+                margin: 40px 18px;
+                padding: 26px 22px;
+            }
+            h1 {
+                font-size: 1.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Feather Finder</h1>
+        <p class="subtitle">Upload a bird image and let the model identify the species with confidence scores.</p>
+        <form action="/predict/" enctype="multipart/form-data" method="post">
+            <label for="file">Select an image</label>
+            <input id="file" type="file" name="file" accept="image/*" required onchange="previewImage(event)">
+
+            <div class="preview" id="previewContainer" style="display:none;">
+                <p><strong>Image preview</strong></p>
+                <img id="previewImage" src="#" alt="Selected bird preview">
+            </div>
+
+            <div class="model-info">
+                <p>Using <strong>Ensemble Model</strong> for classification.</p>
+            </div>
+
+            <input type="submit" value="Classify Image">
+        </form>
+    </div>
+    <script>
+        function previewImage(event) {
+            const file = event.target.files[0];
+            const previewContainer = document.getElementById('previewContainer');
+            const preview = document.getElementById('previewImage');
+
+            if (!file) {
+                previewContainer.style.display = 'none';
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+                previewContainer.style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        }
+    </script>
+</body>
+</html>
